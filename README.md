@@ -61,9 +61,9 @@ npm run dev   # → http://localhost:3000
 
 <div align="center">
 
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=smgsankar&show_icons=true&hide_border=true&bg_color=04070a&title_color=46f27a&text_color=7fa88b&icon_color=ffb347&ring_color=46f27a)
+![Contribution graph](https://ghchart.rshah.org/46f27a/smgsankar)
 
-![Top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=smgsankar&layout=compact&hide_border=true&bg_color=04070a&title_color=46f27a&text_color=d8ffe4)
+![GitHub streak](https://github-readme-streak-stats.herokuapp.com/?user=smgsankar&hide_border=true&background=04070a&ring=46f27a&fire=ffb347&currStreakLabel=46f27a&sideLabels=7fa88b&currStreakNum=d8ffe4&sideNums=d8ffe4&dates=7fa88b&stroke=1a3324)
 
 </div>
 
