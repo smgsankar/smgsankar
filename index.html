@@ -1,11 +1,108 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="./style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gomathi Sankar — smgsankar</title>
+    <meta
+      name="description"
+      content="Gomathi Sankar (smgsankar) — frontend engineer in Bangalore. Eight years of GitHub activity rendered as a phosphor skyline."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <content>
-      Coming Soon...
-    </content>
+    <canvas id="scene"></canvas>
+    <div class="crt" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <span class="topbar__sig">smgsankar<span class="cursor">_</span></span>
+      <nav class="topbar__nav">
+        <a href="https://github.com/smgsankar" target="_blank" rel="noreferrer">github ↗</a>
+        <a href="mailto:gomzsankar@gmail.com">email ↗</a>
+      </nav>
+    </header>
+
+    <div class="hud" aria-hidden="true">
+      <span class="hud__year" id="hud-year">2019</span>
+      <span class="hud__track"><span class="hud__fill" id="hud-fill"></span></span>
+      <span class="hud__label">flying over 2,590 days of commits</span>
+    </div>
+
+    <main id="content">
+      <!-- 01 · hero -->
+      <section class="panel panel--hero">
+        <p class="kicker">observatory // bangalore, india</p>
+        <h1 class="hero__name">Gomathi<br /><em>Sankar</em></h1>
+        <p class="hero__sub">
+          Frontend engineer. I ship <strong>TypeScript</strong> for a living and
+          side-quests in Swift &amp; Python for fun. Below you:
+          <strong>every GitHub contribution I've made since 2019</strong>, raised
+          into a skyline. Scroll to fly across it.
+        </p>
+        <p class="scrollcue">scroll ▼</p>
+      </section>
+
+      <!-- 02 · the ramp -->
+      <section class="panel panel--right">
+        <p class="kicker">02 // the ramp</p>
+        <h2>Slow start,<br /><em>then vertical.</em></h2>
+        <p class="prose">
+          One contribution in 2019. One in 2020. Then the switch flipped —
+          since 2023 I've averaged <strong>~2,700 contributions a year</strong>
+          and never looked back.
+        </p>
+        <ul class="ramp" id="ramp"></ul>
+      </section>
+
+      <!-- 03 · numbers -->
+      <section class="panel panel--left">
+        <p class="kicker">03 // the numbers</p>
+        <h2>Eleven thousand<br /><em>green squares.</em></h2>
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <!-- 04 · languages -->
+      <section class="panel panel--right">
+        <p class="kicker">04 // the toolkit</p>
+        <h2>Typed to the <em>bone.</em></h2>
+        <p class="prose">
+          Share of code across my public repos. TypeScript is home; Swift and
+          Python are the vacation houses.
+        </p>
+        <ul class="langs" id="langs"></ul>
+      </section>
+
+      <!-- 05 · projects -->
+      <section class="panel panel--wide">
+        <p class="kicker">05 // selected builds</p>
+        <h2>Things I've <em>shipped into the void.</em></h2>
+        <div class="projects" id="projects"></div>
+      </section>
+
+      <!-- 06 · outro -->
+      <section class="panel panel--hero panel--outro">
+        <p class="kicker">06 // end of timeline — for now</p>
+        <h2 class="outro__big">The skyline<br /><em>keeps growing.</em></h2>
+        <p class="prose">
+          Want to build something on it together?
+        </p>
+        <div class="outro__links">
+          <a class="btn" href="https://github.com/smgsankar" target="_blank" rel="noreferrer">github.com/smgsankar</a>
+          <a class="btn btn--ghost" href="mailto:gomzsankar@gmail.com">gomzsankar@gmail.com</a>
+        </div>
+        <p class="colophon">
+          built with three.js · data straight from the GitHub GraphQL API ·
+          no squares were harmed
+        </p>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
