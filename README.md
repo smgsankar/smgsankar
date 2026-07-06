@@ -61,9 +61,11 @@ npm run dev   # → http://localhost:3000
 
 <div align="center">
 
-![Contribution graph](https://ghchart.rshah.org/46f27a/smgsankar)
+![GitHub stats](assets/stats-card.svg)
 
-![GitHub streak](https://github-readme-streak-stats.herokuapp.com/?user=smgsankar&hide_border=true&background=04070a&ring=46f27a&fire=ffb347&currStreakLabel=46f27a&sideLabels=7fa88b&currStreakNum=d8ffe4&sideNums=d8ffe4&dates=7fa88b&stroke=1a3324)
+![Top languages](assets/langs-card.svg)
+
+<sub>Rendered from live GitHub API data by <a href="scripts/generate-cards.mjs">a script in this repo</a>, refreshed weekly — no third-party image services to break.</sub>
 
 </div>
 
