@@ -11,6 +11,8 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,13 +35,12 @@ jobs:
           fi
       # Deploy runs only once the CLOUDFLARE_API_TOKEN secret is configured.
       - name: Build site
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' }}
         run: |
           npm ci
           npm run build
       - name: Deploy to Cloudflare Pages
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' }}
         run: npx wrangler pages deploy dist --project-name smgsankar --branch master
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: 4ca609eb19d60613a0ba4636c4767046
