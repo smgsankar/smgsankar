@@ -205,8 +205,8 @@ composer.addPass(bloom);
 /* ================================================================
    Scroll-driven camera flight, 2019 → 2026
    ================================================================ */
-const startX = weekOfDate("2019-06-02") * CELL; // account creation
-const endX = weekOfDate("2026-07-07") * CELL;
+const startX = weekOfDate(calendar[0].d) * CELL; // first ever contribution
+const endX = weekOfDate(TIMELINE.today) * CELL;
 
 let scrollT = 0; // 0..1 smoothed
 let scrollTarget = 0;
@@ -220,6 +220,16 @@ readScroll();
 
 const hudYear = document.getElementById("hud-year");
 const hudFill = document.getElementById("hud-fill");
+
+const firstYear = YEARS[0].year;
+const lastYear = YEARS[YEARS.length - 1].year;
+const daysFlown = Math.round(
+  (new Date(TIMELINE.today + "T00:00:00Z") -
+    new Date(calendar[0].d + "T00:00:00Z")) /
+    DAY_MS
+);
+document.getElementById("hud-label").textContent =
+  `flying over ${daysFlown.toLocaleString("en-US")} days of commits`;
 
 const clock = new THREE.Clock();
 let paused = false;
@@ -250,7 +260,7 @@ function frame() {
   // HUD: current year under the camera + progress bar.
   const date = new Date(gridStart.getTime() + (x / CELL) * 7 * DAY_MS);
   hudYear.textContent = String(
-    Math.min(2026, Math.max(2019, date.getUTCFullYear()))
+    Math.min(lastYear, Math.max(firstYear, date.getUTCFullYear()))
   );
   hudFill.style.transform = `scaleX(${scrollT})`;
 

@@ -1,6 +1,8 @@
-// Generates assets/stats-card.svg and assets/langs-card.svg from live GitHub
-// data, so the profile README never depends on a third-party image service.
-// Usage: GITHUB_TOKEN=<token> node scripts/generate-cards.mjs
+// Refreshes everything derived from GitHub activity in one API pass:
+//   - src/calendar.json      daily contribution counts (feeds the 3D skyline)
+//   - src/github-stats.json  yearly totals, headline stats, language split
+//   - assets/*.svg           the README stat cards
+// Usage: GITHUB_TOKEN=<token> node scripts/refresh-data.mjs
 
 import { writeFileSync, mkdirSync } from "node:fs";
 
@@ -46,12 +48,14 @@ async function rest(path) {
   return res.json();
 }
 
-/* ---------------- data ---------------- */
+/* ---------------- fetch ---------------- */
 const currentYear = new Date().getUTCFullYear();
 const years = [];
+const calendar = [];
 let total = 0;
 let activeDays = 0;
 let peakDay = 0;
+let commits = 0;
 let prsOpened = 0;
 let prsReviewed = 0;
 
@@ -59,25 +63,29 @@ for (let y = FIRST_YEAR; y <= currentYear; y++) {
   const data = await graphql(`query {
     user(login: "${LOGIN}") {
       contributionsCollection(from: "${y}-01-01T00:00:00Z", to: "${y}-12-31T23:59:59Z") {
+        totalCommitContributions
         totalPullRequestContributions
         totalPullRequestReviewContributions
         contributionCalendar {
           totalContributions
-          weeks { contributionDays { contributionCount } }
+          weeks { contributionDays { date contributionCount } }
         }
       }
     }
   }`);
   const cc = data.user.contributionsCollection;
-  const yearTotal = cc.contributionCalendar.totalContributions;
-  years.push({ year: y, total: yearTotal });
-  total += yearTotal;
+  years.push({ year: y, total: cc.contributionCalendar.totalContributions });
+  total += cc.contributionCalendar.totalContributions;
+  commits += cc.totalCommitContributions;
   prsOpened += cc.totalPullRequestContributions;
   prsReviewed += cc.totalPullRequestReviewContributions;
   for (const w of cc.contributionCalendar.weeks) {
     for (const d of w.contributionDays) {
-      if (d.contributionCount > 0) activeDays++;
-      if (d.contributionCount > peakDay) peakDay = d.contributionCount;
+      if (d.contributionCount > 0) {
+        calendar.push({ d: d.date, c: d.contributionCount });
+        activeDays++;
+        if (d.contributionCount > peakDay) peakDay = d.contributionCount;
+      }
     }
   }
 }
@@ -100,13 +108,31 @@ for (const r of repos) {
 for (const skip of ["Makefile", "Procfile", "Shell", "HTML"]) delete bytes[skip];
 const totalBytes = Object.values(bytes).reduce((a, b) => a + b, 0);
 const ranked = Object.entries(bytes)
-  .map(([name, b]) => ({ name, pct: (b / totalBytes) * 100 }))
+  .map(([name, b]) => ({ name, pct: +((b / totalBytes) * 100).toFixed(1) }))
   .sort((a, b) => b.pct - a.pct);
 const top = ranked.slice(0, 5);
 const otherPct = ranked.slice(5).reduce((a, l) => a + l.pct, 0);
-if (otherPct > 0.05) top.push({ name: "Other", pct: otherPct });
+if (otherPct > 0.05) top.push({ name: "Other", pct: +otherPct.toFixed(1) });
 
 const fmt = (n) => n.toLocaleString("en-US");
+
+/* ---------------- site data ---------------- */
+calendar.sort((a, b) => (a.d < b.d ? -1 : 1));
+writeFileSync("src/calendar.json", JSON.stringify(calendar));
+writeFileSync(
+  "src/github-stats.json",
+  JSON.stringify(
+    {
+      generatedAt: new Date().toISOString().slice(0, 10),
+      firstYear: FIRST_YEAR,
+      years,
+      stats: { total, activeDays, peakDay, commits, prsOpened, prsReviewed },
+      languages: top,
+    },
+    null,
+    2
+  )
+);
 
 /* ---------------- svg helpers ---------------- */
 const esc = (s) =>
@@ -149,7 +175,6 @@ kpis.forEach((k, i) => {
 svg1 += `
   <text x="36" y="286" font-family="${MONO}" font-size="11" fill="${C.dim}">peak: <tspan fill="${C.ink}">${peakDay} contributions</tspan> in a single day</text>`;
 
-// Yearly bars, right column.
 const chartX = 470;
 const chartW = W1 - chartX - 96;
 const rowH = (H1 - 96) / years.length;
@@ -200,5 +225,5 @@ mkdirSync("assets", { recursive: true });
 writeFileSync("assets/stats-card.svg", statsCard);
 writeFileSync("assets/langs-card.svg", langsCard);
 console.log(
-  `wrote assets/stats-card.svg + assets/langs-card.svg — ${fmt(total)} contributions, ${top.length} languages`
+  `refreshed: ${fmt(total)} contributions, ${activeDays} active days, ${top.length} languages`
 );

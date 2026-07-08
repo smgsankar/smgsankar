@@ -1,36 +1,39 @@
-// GitHub activity for @smgsankar, pulled from the REST + GraphQL APIs (2026-07-07).
+// Activity numbers come from src/github-stats.json + src/calendar.json,
+// regenerated weekly by scripts/refresh-data.mjs. Curated content
+// (labels, colors, project blurbs) lives here.
 import calendar from "./calendar.json";
+import gh from "./github-stats.json";
 
 export { calendar };
 
-export const YEARS = [
-  { year: 2019, total: 1 },
-  { year: 2020, total: 1 },
-  { year: 2021, total: 28 },
-  { year: 2022, total: 178 },
-  { year: 2023, total: 2540 },
-  { year: 2024, total: 3021 },
-  { year: 2025, total: 2554 },
-  { year: 2026, total: 2698 },
-];
+export const GENERATED_AT = gh.generatedAt;
+
+export const YEARS = gh.years;
+
+const fmt = (n) => n.toLocaleString("en-US");
 
 export const STATS = [
-  { value: "11,021", label: "contributions since 2019" },
-  { value: "1,100", label: "days with at least one commit" },
-  { value: "66", label: "contributions on the wildest day" },
-  { value: "1,059", label: "pull requests opened" },
-  { value: "697", label: "pull requests reviewed" },
-  { value: "29", label: "repositories, public + private" },
+  { value: fmt(gh.stats.total), label: `contributions since ${gh.firstYear}` },
+  { value: fmt(gh.stats.activeDays), label: "days with at least one commit" },
+  { value: fmt(gh.stats.peakDay), label: "contributions on the wildest day" },
+  { value: fmt(gh.stats.prsOpened), label: "pull requests opened" },
+  { value: fmt(gh.stats.prsReviewed), label: "pull requests reviewed" },
+  { value: fmt(gh.stats.commits), label: "commits pushed" },
 ];
 
-export const LANGUAGES = [
-  { name: "TypeScript", pct: 67.5, color: "#46f27a" },
-  { name: "Swift", pct: 12.3, color: "#ffb347" },
-  { name: "JavaScript", pct: 9.1, color: "#9dffbe" },
-  { name: "Python", pct: 6.4, color: "#6ee7ff" },
-  { name: "CSS", pct: 3.6, color: "#ff8fa3" },
-  { name: "Other", pct: 1.1, color: "#7fa88b" },
-];
+const LANG_COLORS = {
+  TypeScript: "#46f27a",
+  Swift: "#ffb347",
+  JavaScript: "#9dffbe",
+  Python: "#6ee7ff",
+  CSS: "#ff8fa3",
+};
+
+export const LANGUAGES = gh.languages.map(({ name, pct }) => ({
+  name,
+  pct,
+  color: LANG_COLORS[name] || "#7fa88b",
+}));
 
 export const PROJECTS = [
   {
@@ -77,7 +80,10 @@ export const PROJECTS = [
   },
 ];
 
+const lastYear = gh.years[gh.years.length - 1].year;
+
 export const TIMELINE = {
-  start: "2019-01-01",
-  end: "2026-12-31",
+  start: `${gh.firstYear}-01-01`,
+  end: `${lastYear}-12-31`,
+  today: gh.generatedAt,
 };

@@ -65,7 +65,7 @@ npm run dev   # → http://localhost:3000
 
 ![Top languages](assets/langs-card.svg)
 
-<sub>Rendered from live GitHub API data by <a href="scripts/generate-cards.mjs">a script in this repo</a>, refreshed weekly — no third-party image services to break.</sub>
+<sub>Rendered from live GitHub API data by <a href="scripts/refresh-data.mjs">a script in this repo</a>, refreshed weekly — no third-party image services to break. The same job re-bakes the 3D skyline's data and redeploys the portfolio.</sub>
 
 </div>
 

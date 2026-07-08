@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-07-08",
+  "firstYear": 2019,
+  "years": [
+    {
+      "year": 2019,
+      "total": 1
+    },
+    {
+      "year": 2020,
+      "total": 1
+    },
+    {
+      "year": 2021,
+      "total": 28
+    },
+    {
+      "year": 2022,
+      "total": 178
+    },
+    {
+      "year": 2023,
+      "total": 2540
+    },
+    {
+      "year": 2024,
+      "total": 3021
+    },
+    {
+      "year": 2025,
+      "total": 2554
+    },
+    {
+      "year": 2026,
+      "total": 2704
+    }
+  ],
+  "stats": {
+    "total": 11027,
+    "activeDays": 1101,
+    "peakDay": 66,
+    "commits": 8339,
+    "prsOpened": 1059,
+    "prsReviewed": 697
+  },
+  "languages": [
+    {
+      "name": "TypeScript",
+      "pct": 64.4
+    },
+    {
+      "name": "Swift",
+      "pct": 11.6
+    },
+    {
+      "name": "JavaScript",
+      "pct": 10.1
+    },
+    {
+      "name": "Python",
+      "pct": 9.7
+    },
+    {
+      "name": "CSS",
+      "pct": 4.2
+    }
+  ]
+}
