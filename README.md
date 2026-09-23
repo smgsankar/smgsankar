@@ -2,7 +2,7 @@
 
 # Gomathi Sankar
 
-**Frontend Engineer · Bangalore, India**
+**Frontend Engineer · React, TypeScript & AI-Assisted Software Development · Bangalore, India**
 
 Shipping TypeScript for a living, side-questing in Swift & Python for fun.
 
