@@ -1,11 +1,11 @@
 // Refreshes everything derived from GitHub activity in one API pass:
 //   - src/calendar.json      daily contribution counts (feeds the 3D skyline)
 //   - src/github-stats.json  yearly totals, headline stats, language split
-//   - assets/*.svg           the README stat cards (light + dark, see cards.mjs)
+//   - README.md              the Stats block (see readme-stats.mjs)
 // Usage: GITHUB_TOKEN=<token> node scripts/refresh-data.mjs
 
-import { writeFileSync, mkdirSync } from "node:fs";
-import { renderCards } from "./cards.mjs";
+import { writeFileSync } from "node:fs";
+import { updateReadme } from "./readme-stats.mjs";
 
 const LOGIN = "smgsankar";
 const FIRST_YEAR = 2019;
@@ -119,11 +119,8 @@ const siteData = {
 
 writeFileSync("src/github-stats.json", JSON.stringify(siteData, null, 2));
 
-/* ---------------- README cards ---------------- */
-mkdirSync("assets", { recursive: true });
-for (const [name, svg] of Object.entries(renderCards(siteData))) {
-  writeFileSync(`assets/${name}`, svg);
-}
+/* ---------------- README ---------------- */
+updateReadme(siteData);
 console.log(
   `refreshed: ${fmt(total)} contributions, ${activeDays} active days, ${top.length} languages`
 );

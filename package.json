@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "cards": "node scripts/render-cards.mjs",
+    "stats": "node scripts/render-readme.mjs",
     "refresh": "node scripts/refresh-data.mjs"
   },
   "dependencies": {

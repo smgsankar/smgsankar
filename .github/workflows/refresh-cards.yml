@@ -24,12 +24,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit refreshed data
         run: |
-          if git diff --quiet assets/ src/; then
+          if git diff --quiet README.md src/; then
             echo "data unchanged, nothing to commit"
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add assets/ src/calendar.json src/github-stats.json
+            git add README.md src/calendar.json src/github-stats.json
             git commit -m "Refresh GitHub activity data"
             git push
           fi

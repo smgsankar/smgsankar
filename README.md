@@ -59,21 +59,22 @@ npm run dev   # → http://localhost:3000
 
 ## 📈 Stats
 
-<div align="center">
+<!-- stats:start -->
+```
+12,176  contributions since 2019
+ 1,162  days with commits
+    81  best single day
+  10.5  contributions per active day
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/stats-card-dark.svg">
-  <img alt="GitHub contributions: total since 2019, active days, best day, and a year-by-year chart" src="assets/stats-card-light.svg" width="846">
-</picture>
+TypeScript  ████████████████████████████  64.1%
+Swift       █████                         11.5%
+JavaScript  ████▋                         10.5%
+Python      ████▎                          9.7%
+CSS         █▉                             4.2%
+```
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/langs-card-dark.svg">
-  <img alt="Share of public code by language" src="assets/langs-card-light.svg" width="846">
-</picture>
-
-<sub>Rendered from live GitHub API data by <a href="scripts/refresh-data.mjs">a script in this repo</a>, refreshed weekly — no third-party image services to break. Light and dark variants follow your GitHub theme. The same job re-bakes the 3D skyline's data and redeploys the portfolio.</sub>
-
-</div>
+<sub>Refreshed weekly from the GitHub API by <a href="scripts/refresh-data.mjs">a script in this repo</a> — last run 2026-09-27. The same job re-bakes the 3D skyline's data and redeploys the portfolio.</sub>
+<!-- stats:end -->
 
 ---
 
