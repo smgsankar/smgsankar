@@ -61,19 +61,19 @@ npm run dev   # → http://localhost:3000
 
 <!-- stats:start -->
 ```
-12,176  contributions since 2019
- 1,162  days with commits
+12,276  contributions since 2019
+ 1,167  days with commits
     81  best single day
   10.5  contributions per active day
 
-TypeScript  ████████████████████████████  64.1%
-Swift       █████                         11.5%
-JavaScript  ████▋                         10.5%
+TypeScript  ████████████████████████████  64.5%
+Swift       █████                         11.6%
+JavaScript  ████▍                         10.1%
 Python      ████▎                          9.7%
 CSS         █▉                             4.2%
 ```
 
-<sub>Refreshed weekly from the GitHub API by <a href="scripts/refresh-data.mjs">a script in this repo</a> — last run 2026-09-27. The same job re-bakes the 3D skyline's data and redeploys the portfolio.</sub>
+<sub>Refreshed weekly from the GitHub API by <a href="scripts/refresh-data.mjs">a script in this repo</a> — last run 2026-09-28. The same job re-bakes the 3D skyline's data and redeploys the portfolio.</sub>
 <!-- stats:end -->
 
 ---
